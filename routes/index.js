@@ -36,7 +36,7 @@ router.post('/login', function(req, res, next){
 });
 
 // Provoque la déconnexion
-router.post('/logout', function(req, res, next){
+router.get('/logout', function(req, res, next){
     req.session.destroy();
     res.redirect('/login');
 });
