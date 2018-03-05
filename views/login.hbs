@@ -1,15 +1,20 @@
 <form action="/login" method="post">
-    <div>
-        <label>Nom d'utilisateur :</label>
-        <input type="text" name="username"/>
+    <p class="h4 text-center mb-4">Connexion</p>
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="text" id="materialFormLoginEmailEx" class="form-control" name="username">
+        <label for="materialFormLoginEmailEx">Nom d'utilisateur</label>
     </div>
-    <div>
-        <label>Mot de passe :</label>
-        <input type="password" name="password"/>
+    <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="password" id="materialFormLoginPasswordEx" class="form-control" name="password">
+        <label for="materialFormLoginPasswordEx">Mot de passe</label>
     </div>
-    <div>
-        <input type="submit" value="Se connecter"/>
+    <div class="text-center mt-4">
+        <button class="btn btn-primary" type="submit">Se connecter</button>
     </div>
 </form>
-<a href="/users/create">Créer un compte</a>
-<a href="/reset-password">Mot de passe oublié</a>
+<div class="text-center mt-4">
+    <a href="/users/create">Créer un compte</a> | 
+    <a href="/reset-password">Mot de passe oublié</a>
+</div>

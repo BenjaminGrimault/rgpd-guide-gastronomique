@@ -1,33 +1,32 @@
 <form action="/users/create" method="post">
-    <div>
-        <label>Adresse email :</label>
-        <input type="text" name="mail"/>
+    <p class="h4 text-center mb-4">Créer un compte</p>
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="materialFormRegisterNameEx" class="form-control" name="username">
+        <label for="materialFormRegisterNameEx">Nom d'utilisateur</label>
     </div>
-    <div>
-        <label>Confirmation email :</label>
-        <input type="text" name="cmail"/>
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="email" id="materialFormRegisterEmailEx" class="form-control" name="mail">
+        <label for="materialFormRegisterEmailEx">Adresse email</label>
     </div>
-    <div>
-        <label>Pseudonyme :</label>
-        <input type="text" name="pseudonyme"/>
+    <div class="md-form">
+        <i class="fa fa-exclamation-triangle prefix grey-text"></i>
+        <input type="email" id="materialFormRegisterConfirmEx" class="form-control" name="cmail">
+        <label for="materialFormRegisterConfirmEx">Confirmation de l'email</label>
     </div>
-    <div>
-        <label>Nom d'utilisateur :</label>
-        <input type="text" name="username"/>
+    <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="password" id="materialFormRegisterPasswordEx" class="form-control" name="password">
+        <label for="materialFormRegisterPasswordEx">Mot de passe</label>
     </div>
-    <div>
-        <label>Mot de passe :</label>
-        <input type="password" name="password"/>
+    <div class="form-check">
+        <input class="form-check-input filled-in" type="checkbox" value="" id="filledInCheckbox1" name="cgu-ok">
+        <label class="form-check-label" for="filledInCheckbox1">
+            J'accepte sans broncher les CGU, sans les avoir lues préalablement de façon volontaire
+        </label>
     </div>
-    <div>
-        <label>Confirmation mot de passe :</label>
-        <input type="password" name="cpassword"/>
-    </div>
-    <div>
-        <input type="checkbox" name="cgu-ok"/>
-        <label>J'accepte sans broncher les CGU, sans les avoir lues préalablement de façon volontaire</label>
-    </div>
-    <div>
-        <input type="submit" value="S'inscrire"/>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">S'inscrire</button>
     </div>
 </form>
