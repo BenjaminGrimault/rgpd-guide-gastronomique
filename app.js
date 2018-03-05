@@ -9,6 +9,12 @@ var session = require('express-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+require('./services/db');
+
+db.getUsers(function(users) {
+    console.log(users);
+});
+
 var app = express();
 
 // view engine setup
