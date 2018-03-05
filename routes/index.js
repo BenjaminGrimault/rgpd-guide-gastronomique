@@ -19,7 +19,11 @@ router.get('/login', function(req, res, next){
     } else {
         res.redirect('/');
     }
-    
+});
+
+// Réinitilisation du mot de passe
+router.get('/reset-password', function(req, res, next){
+    res.render('reset-password');
 });
 
 // Envoi du formulaire de connexion
