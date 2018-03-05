@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 // Accueil
-router.get('/', function(req, res, next){
-    if(!req.session.user){
+router.get('/', function(req, res, next) {
+    if (! req.session.user) {
         res.redirect('/login');
     } else {
         res.render('index', {
@@ -13,8 +13,8 @@ router.get('/', function(req, res, next){
 });
 
 // Accès à la page de connexion
-router.get('/login', function(req, res, next){
-    if(!req.session.user){
+router.get('/login', function(req, res, next) {
+    if (! req.session.user) {
         res.render('login');
     } else {
         res.redirect('/');
@@ -27,7 +27,7 @@ router.get('/reset-password', function(req, res, next){
 });
 
 // Envoi du formulaire de connexion
-router.post('/login', function(req, res, next){
+router.post('/login', function(req, res, next) {
     // @WARNING : bypass de la logique backend de connexion pour le moment
     req.session.user = {
         username: req.body.username
