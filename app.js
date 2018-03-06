@@ -7,20 +7,19 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 const assert = require('assert');
+
+// Variables d'environnement
+require('dotenv').load();
 
 // Controllers
 const index = require('./routes/index');
 const users = require('./routes/users');
 
-// DB
-const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017';
-const dbName = 'rgpd-guide-gastronomique';
-
-
-mongoose.connect(url, {
-    poolSize: 10, // Maintain up to 10 socket connections
+mongoose.connect(process.env.DB_URL, {
+    // Maintient 10 socket de connexion ouverts
+    poolSize: 10,
 }, function(error) {
     console.log(error || 'Connected successfully to database');
 });
