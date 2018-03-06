@@ -6,9 +6,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
-const assert = require('assert');
 
 // Variables d'environnement
 require('dotenv').load();
@@ -17,7 +15,7 @@ require('dotenv').load();
 const index = require('./routes/index');
 const users = require('./routes/users');
 
-mongoose.connect(process.env.DB_URL, {
+mongoose.connect(process.env.DB_URL + '/' + process.env.DB_NAME, {
     // Maintient 10 socket de connexion ouverts
     poolSize: 10,
 }, function(error) {
