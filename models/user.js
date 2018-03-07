@@ -5,6 +5,7 @@ module.exports = function() {
         username: String,
         password: String,
         email: String,
+        newsletter: String
     });
 
     let model = mongoose.model('User', schema);
