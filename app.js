@@ -14,6 +14,7 @@ require('dotenv').load();
 // Controllers
 const index = require('./routes/index');
 const users = require('./routes/users');
+const restaurants = require('./routes/restaurants');
 
 mongoose.connect(process.env.DB_URL + '/' + process.env.DB_NAME, {
     // Maintient 10 socket de connexion ouverts
@@ -41,6 +42,7 @@ app.use(session({
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/restaurants', restaurants);
 
 // Capture les 404 et les passe au gestionnaire d'erreur
 app.use(function(req, res, next) {

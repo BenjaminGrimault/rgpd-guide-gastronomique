@@ -1,0 +1,33 @@
+<h1>Restaurants</h1>
+
+<nav aria-label="Pagination">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="/restaurants?page={{ previousPage }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="/restaurants?page={{ nextPage }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="row">
+  {{#each restaurants}}
+  <div class="col-6 col-md-4 col-xl-3 my-3">
+    <a href="/restaurants/id/{{ restaurant_id }}" class="card text-center">
+      <div class="card-body">
+        <div class="card-title">{{ name }}</div>
+        <div class="card-text">
+          {{ address.building }} {{ address.street }} {{ address.zipcode }}
+        </div>
+      </div>
+    </a>
+  </div>
+  {{/each}}
+</div>

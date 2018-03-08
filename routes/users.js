@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const router = express.Router();
-const db = mongoose.connection;
 
 // Page de création de compte
 router.get('/create', function(req, res, next) {
