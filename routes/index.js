@@ -24,14 +24,13 @@ router.get('/login', function(req, res, next) {
     }
 });
 
-// Réinitilisation du mot de passe
+// Réinitilisation du mot de passe par renvoi de mail
 router.get('/reset-password', function(req, res, next) {
     res.render('reset-password');
 });
 
 // Si le mail est dans la base, on simule un envoi de mail
 router.post('/reset-password', function(req, res, next) {
-    console.log(req.body.email);
     User.find({email: req.body.email}, function(err, user){
         if(err){
             throw err;
@@ -60,7 +59,8 @@ router.post('/login', function(req, res, next) {
         }
         if(user.length === 1){
             req.session.user = {
-                username: user[0].username
+                username: user[0].username,
+                email: user[0].email
             };
             res.redirect('/');
         } else {

@@ -1,0 +1,21 @@
+<form action="/users/update" method="post">
+    <p class="h4 text-center mb-4">Mon compte</p>
+    <div class="md-form">
+		Pseudonyme : {{username}}
+    </div>
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="email" id="materialFormRegisterEmailEx" class="form-control" name="email" value="{{email}}">
+        <label for="materialFormRegisterEmailEx">Adresse email</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input filled-in" type="checkbox" id="filledInCheckbox1" name="newsletter" checked="{{newsletter}}">
+        <label class="form-check-label" for="filledInCheckbox1">
+            J'accepte de recevoir la newsletter du site.
+        </label>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+        <a class="btn btn-red" href="/delete-account">Supprimer le compte</a>
+    </div>
+</form>
