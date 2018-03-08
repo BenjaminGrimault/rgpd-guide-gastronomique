@@ -70,6 +70,11 @@ router.post('/login', function(req, res, next) {
 });
 
 // Provoque la déconnexion
+router.get('/cgu', function(req, res, next) {
+    res.render('CGU');
+});
+
+// Provoque la déconnexion
 router.get('/logout', function(req, res, next) {
     req.session.destroy();
     res.redirect('/login');
