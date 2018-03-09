@@ -29,6 +29,30 @@ router.post('/create', function(req, res, next) {
     });
 });
 
+// Suppression de compte
+router.get('/delete', function(req, res, next) {
+    let query = {email: req.session.user.email};
+    // Delete de l'user
+    User.deleteOne(query, function(err, user){
+        if(err){
+            throw err;
+        }
+        console.log('Account successfully deleted');
+        // Destruction de la session et déplacement sur la page de login
+        req.session.destroy();
+        res.redirect('/login');
+    });
+});
+
+// POST de la suppression de compte
+router.post('/delete', function(req, res, next) {
+    if (! req.session.user) {
+        res.render('login');
+    } else {
+        res.render('delete-users');
+    }
+});
+
 // Page de gestion de compte
 router.get('/account', function(req, res, next) {
     if (! req.session.user) {
@@ -61,6 +85,5 @@ router.post('/update', function(req, res, next) {
         res.redirect('/');
     }
 });
-
 
 module.exports = router;
