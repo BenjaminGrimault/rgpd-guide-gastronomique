@@ -8,7 +8,9 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <i class="fa fa-location-arrow mr-3"></i>
-        {{ restaurant.address.building }} {{ restaurant.address.street }} {{ restaurant.address.zipcode }} {{ restaurant.borough }}
+        {{#with restaurant.address}}
+        {{ building }} {{ street }}, {{ zipcode }} {{ restaurant.borough }}
+        {{/with}}
       </li>
 
       <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -34,4 +36,55 @@
       {{/each}}
     </ul>
   </div>
+</div>
+
+<div>
+  <h2>Avis des clients</h2>
+
+  {{#if reviews}}
+  <ul class="list-unstyled">
+    {{#each reviews}}
+    <li class="media my-2">
+      <img class="mr-3" src="" alt="User icon" />
+      <div class="media-body">
+        <h5 class="mt-0 mb-1">
+          {{ userName }} - {{ stars }} <i class="fa fa-star"></i>
+          <small class="text-muted">{{#roundDate date}}{{/roundDate}}</small>
+        </h5>
+        {{ text }}
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <div class="alert alert-primary" role="alert">Les clients n'ont pas encore donné leur avis (ou bien il n'avaient pas envie de mettre un avis méchant).</div>
+  {{/if}}
+
+  {{#logon}}
+  <h5>Vous pouvez ajouter un avis (reste poli STP) :</h5>
+  <form action="/reviews/create" method="POST">
+    <input type="hidden" name="restaurantId" value="{{ restaurant.restaurant_id }}" />
+
+    <div class="form-group">
+      <label for="review-stars">Votre note (imaginez des étoiles) :</label>
+      <select class="form-control" id="review-stars" name="stars">
+        <option value="0" selected="selected">
+          0 (on sait que vous voulez mettre ça, du coup, on l'a présélectionné pour vous)
+        </option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="review-text">Votre message :</label>
+      <textarea class="form-control" id="review-text" name="text" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Pourrir ce restaurant</button>
+  </form>
+  {{/logon}}
 </div>
