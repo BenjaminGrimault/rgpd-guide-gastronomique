@@ -3,6 +3,7 @@ const router = express.Router();
 const CryptoJS = require("crypto-js");
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const Review = require('../models/review');
 
 // Page de création de compte
 router.get('/create', function(req, res, next) {
@@ -29,28 +30,41 @@ router.post('/create', function(req, res, next) {
     });
 });
 
-// Suppression de compte
+// Page de la suppression de compte
 router.get('/delete', function(req, res, next) {
-    let query = {email: req.session.user.email};
-    // Delete de l'user
-    User.deleteOne(query, function(err, user){
-        if(err){
-            throw err;
-        }
-        console.log('Account successfully deleted');
-        // Destruction de la session et déplacement sur la page de login
-        req.session.destroy();
-        res.redirect('/login');
-    });
-});
-
-// POST de la suppression de compte
-router.post('/delete', function(req, res, next) {
     if (! req.session.user) {
         res.render('login');
     } else {
         res.render('delete-users');
     }
+});
+
+// POST de la suppression de compte
+router.post('/delete', function(req, res, next) {
+    // On recherche l'user courant
+    User.find({email: req.session.user.email}, function(err, user){
+        if(err){
+            throw err;
+        }
+        // Stockage de son Id pour effacement des avis liés
+        let id = user[0]._id;
+        // Delete de l'user
+        User.deleteOne(query, function(err, user){
+            if(err){
+                throw err;
+            }
+            console.log('Account successfully deleted');
+            Review.deleteMany({_id: id}, function(err){
+                if(err){
+                    throw err;
+                }
+                console.log('Reviews successfully deleted');
+                // Destruction de la session et déplacement sur la page de login
+                req.session.destroy();
+                res.redirect('/login');
+            });
+        });
+    });
 });
 
 // Page de gestion de compte
