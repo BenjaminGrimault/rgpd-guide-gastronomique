@@ -1,20 +1,21 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
+const express      = require('express');
+const app          = express();
+const path         = require('path');
+const favicon      = require('serve-favicon');
+const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const mongoose = require('mongoose');
+const bodyParser   = require('body-parser');
+const session      = require('express-session');
+const mongoose     = require('mongoose');
 
 // Variables d'environnement
 require('dotenv').load();
 
 // Controllers
-const index = require('./routes/index');
-const users = require('./routes/users');
+const index       = require('./routes/index');
+const users       = require('./routes/users');
 const restaurants = require('./routes/restaurants');
+const reviews     = require('./routes/reviews');
 
 mongoose.connect(process.env.DB_URL + '/' + process.env.DB_NAME, {
     // Maintient 10 socket de connexion ouverts
@@ -26,6 +27,7 @@ mongoose.connect(process.env.DB_URL + '/' + process.env.DB_NAME, {
 // Moteur de template des vues
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+require('./hbs-helpers');
 
 // A décommenter après avoir placé la favicon dans /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -43,6 +45,7 @@ app.use(session({
 app.use('/', index);
 app.use('/users', users);
 app.use('/restaurants', restaurants);
+app.use('/reviews', reviews);
 
 // Capture les 404 et les passe au gestionnaire d'erreur
 app.use(function(req, res, next) {

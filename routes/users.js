@@ -21,9 +21,7 @@ router.post('/create', function(req, res, next) {
         if (err) {
             throw err;
         }
-        req.session.user = {
-            username: req.body.username
-        };
+        req.session.user = user;
         res.redirect('/');
     });
 });

@@ -31,13 +31,11 @@ router.get('/reset-password', function(req, res, next) {
 
 // Si le mail est dans la base, on simule un envoi de mail
 router.post('/reset-password', function(req, res, next) {
-    console.log(req.body.email);
-    User.find({email: req.body.email}, function(err, user){
-        if(err){
+    User.find({email: req.body.email}, function(err, user) {
+        if (err) {
             throw err;
         }
-        console.log(user);
-        if(user.length === 1){
+        if (user.length === 1) {
             res.render('message', {
                 message: "Un mail contenant les instructions de réinitialisation de mot de passe vous à été envoyé."
             });
@@ -53,15 +51,13 @@ router.post('/reset-password', function(req, res, next) {
 router.post('/login', function(req, res, next) {
     let binds = {
         username: req.body.username
-    }
-    User.find(binds, function(err, user){
-        if(err){
+    };
+    User.find(binds, function(err, user) {
+        if (err) {
             throw err;
         }
-        if(user.length === 1){
-            req.session.user = {
-                username: user[0].username
-            };
+        if (user.length === 1) {
+            req.session.user = user[0];
             res.redirect('/');
         } else {
             res.redirect('/login');
