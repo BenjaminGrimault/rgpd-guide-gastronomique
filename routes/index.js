@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const CryptoJS = require("crypto-js");
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const db = mongoose.connection;
@@ -56,12 +57,18 @@ router.post('/login', function(req, res, next) {
         if (err) {
             throw err;
         }
-        if (user.length === 1) {
-            req.session.user = user[0];
-            res.redirect('/');
-        } else {
-            res.redirect('/login');
+        if(user.length > 0){
+            user = user[0];
+            if (user.password === CryptoJS.SHA256(req.body.password).toString()) {
+                req.session.user = user;
+                // On vide l'attribut password afin qu'il ne soit pas stocké dans la session (bien qu'il soit chiffré)
+                req.session.user.password = '';
+                res.redirect('/');
+            } else {
+                res.redirect('/login');
+            }
         }
+        res.redirect('/login');
     });
 });
 

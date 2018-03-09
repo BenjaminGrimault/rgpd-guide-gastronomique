@@ -1,7 +1,8 @@
 const express = require('express');
+const router = express.Router();
+const CryptoJS = require("crypto-js");
 const mongoose = require('mongoose');
 const User = require('../models/user');
-const router = express.Router();
 
 // Page de création de compte
 router.get('/create', function(req, res, next) {
@@ -12,7 +13,7 @@ router.get('/create', function(req, res, next) {
 router.post('/create', function(req, res, next) {
     const user = new User({
         username: req.body.username,
-        password: req.body.password,
+        password: CryptoJS.SHA256(req.body.password),
         email: req.body.email,
         newsletter: req.body.newsletter
     });
@@ -22,6 +23,8 @@ router.post('/create', function(req, res, next) {
             throw err;
         }
         req.session.user = user;
+        // On vide l'attribut password afin qu'il ne soit pas stocké en session
+        req.session.user.password = '';
         res.redirect('/');
     });
 });
