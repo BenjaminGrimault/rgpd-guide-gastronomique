@@ -24,7 +24,7 @@ router.get('/login', function(req, res, next) {
     }
 });
 
-// Réinitilisation du mot de passe
+// Réinitilisation du mot de passe par renvoi de mail
 router.get('/reset-password', function(req, res, next) {
     res.render('reset-password');
 });
@@ -63,6 +63,11 @@ router.post('/login', function(req, res, next) {
             res.redirect('/login');
         }
     });
+});
+
+// Provoque la déconnexion
+router.get('/cgu', function(req, res, next) {
+    res.render('CGU');
 });
 
 // Provoque la déconnexion
